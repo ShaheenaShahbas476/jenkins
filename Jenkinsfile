@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/ShaheenaShahbas476/FA3-CLIP'
+                    url: 'https://github.com/ShaheenaShahbas476/jenkins'
             }
         }
 
