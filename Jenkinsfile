@@ -1,13 +1,7 @@
 pipeline {
-
     agent any
 
-    triggers {
-        pollSCM('* * * * *')   // Poll every minute for changes (auto-trigger)
-    }
-
     stages {
-
         stage('Checkout') {
             steps {
                 git branch: 'main',
@@ -19,16 +13,19 @@ pipeline {
             steps {
                 echo "Running tests..."
                 sh """
-                pip install pytest
-                pytest -q
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip install --upgrade pip
+                    pip install pytest
+                    pytest -q
                 """
             }
         }
 
         stage('Deploy') {
             steps {
-                echo "Deploying application..."
-                sh 'echo "Deployment Successful!"'
+                echo "Deploying..."
+                sh 'echo Deployment Successful!'
             }
         }
     }
